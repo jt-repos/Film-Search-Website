@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<center><h1>{{ current_user.username }}'s Favourite Films</h1></center>
+
+<div class="container-fluid col-10 shadow p-3 mb-5 bg-white rounded">
+      <div class = "panel active" id = "a">
+          {% for film in myFilms %}
+          <div>
+              <th scope="row"><h3>{{ film.filmName }}</h3></th>
+
+              <table class="table">
+                  <tr>
+                  </tr>
+                  <tbody>
+                  <tr>
+                    <th scope="row">Length:</th>
+                    <td style="word-wrap: break-word; min-width: 700px; max-width: 700px;">{{ film.length }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Release Date:</th>
+                    <td style="word-wrap: break-word; min-width: 700px; max-width: 700px;">{{ film.releaseDate }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Studio Name:</th>
+                    <td style="word-wrap: break-word; min-width: 700px; max-width: 700px;">{{ film.studioName }}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+          {% endfor %}
+
+          {% if not(myFilms) %}
+          <center><div class="text-dark">Looks like you have no favourite films. Add one in the explore tab!</div></center>
+          {% endif %}
+      </div>
+      <p><a href="/changePassword"><input style="margin-top: 10px" class="btn btn-outline-primary col-12" type="submit" value="Change Password"></a></p>
+</div>
+{% endblock %}

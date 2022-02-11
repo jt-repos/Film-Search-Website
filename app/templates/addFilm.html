@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid col-6">
+    <center><h1>Add Film</h1></center>
+    <!--A form to input each of the values into the database with an accept button to confirm-->
+        <form action="" method="post" name="Add Film">
+            {{ form.hidden_tag() }}
+            Film Name
+            {{ form.filmName(class_='form-control', placeholder='Enter film name') }}
+            {% for error in form.filmName.errors %}
+            <div class="alert alert-danger" role="alert" style="margin-top:10px">
+                [{{ error }}]
+             </div>
+            {% endfor %}
+            <br>
+
+            Length In minutes
+            {{ form.length(class_='form-control', placeholder='Enter length') }}
+            {% for error in form.length.errors %}
+            <div class="alert alert-danger" role="alert" style="margin-top:10px">
+              [{{ error }}]
+            </div>
+            {% endfor %}
+            <br>
+
+            Release Date
+            {{ form.releaseDate(class_='form-control', placeholder='dd-mm-yyyy') }}
+            {% for error in form.releaseDate.errors %}
+            <div class="alert alert-danger" role="alert" style="margin-top:10px">
+              [{{ error }}]
+            </div>
+            {% endfor %}
+            <br>
+
+            Studio Name
+            {{ form.studioName(class_='form-control', placeholder='Enter studio name') }}
+            {% for error in form.studioName.errors %}
+            <div class="alert alert-danger" role="alert" style="margin-top:10px">
+              [{{ error }}]
+            </div>
+            {% endfor %}
+            <br>
+            <p><input style="margin-top: 10px" class="btn btn-outline-primary col-12" type="submit" value="Add Film"></p>
+        </form>
+</div>
+{% endblock %}

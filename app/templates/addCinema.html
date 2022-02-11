@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid col-6">
+<center><h1>Add Cinema</h1></center>
+<!--A form to input each of the values into the database with an accept button to confirm-->
+    <form action="" method="post" name="Add Cinema">
+        {{ form.hidden_tag() }}
+        Cinema Name
+        {{ form.cinemaName(class_='form-control', placeholder='Enter cinema name') }}
+        {% for error in form.cinemaName.errors %}
+         <div class="alert alert-danger" role="alert" style="margin-top:10px">
+            [{{ error }}]
+         </div>
+        {% endfor %}
+        <br>
+
+        Address
+        {{ form.address(class_='form-control', placeholder='Enter address') }}
+        {% for error in form.address.errors %}
+        <div class="alert alert-danger" role="alert" style="margin-top:10px">
+          [{{ error }}]
+        </div>
+        {% endfor %}
+        <br>
+
+        Capacity
+        {{ form.capacity(class_='form-control', placeholder='Enter capacity') }}
+        {% for error in form.capacity.errors %}
+        <div class="alert alert-danger" role="alert" style="margin-top:10px">
+          [{{ error }}]
+        </div>
+        {% endfor %}
+        <br>
+
+        Open Time
+        {{ form.openTime(class_='form-control', placeholder='hh:mm:ss') }}
+        {% for error in form.openTime.errors %}
+        <div class="alert alert-danger" role="alert" style="margin-top:10px">
+          [{{ error }}]
+        </div>
+        {% endfor %}
+        <br>
+
+        Close Time
+        {{ form.closeTime(class_='form-control', placeholder='hh:mm:ss') }}
+        {% for error in form.closeTime.errors %}
+        <div class="alert alert-danger" role="alert" style="margin-top:10px">
+          [{{ error }}]
+        </div>
+        {% endfor %}
+        <br>
+        <p><input style="margin-top: 10px" class="btn btn-outline-primary col-12" type="submit" value="Add Cinema"></p>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid col-4">
+<center><h1>Create Account</h1></center>
+<!--A form to input each of the values into the database with an accept button to confirm-->
+<form action="" method="post" name="Create Account" class="col-12">
+    {{ form.hidden_tag() }}
+    Username
+    {{ form.username(class_='form-control', placeholder='Enter username') }}
+    {% for error in form.username.errors %}
+     <div class="alert alert-danger" role="alert" style="margin-top:10px">
+        [{{ error }}]
+     </div>
+    {% endfor %}
+    <br>
+
+    Email
+    {{ form.email(class_='form-control', placeholder='Enter email') }}
+    {% for error in form.email.errors %}
+    <div class="alert alert-danger" role="alert" style="margin-top:10px">
+      [{{ error }}]
+    </div>
+    {% endfor %}
+    <br>
+
+    Password
+    {{ form.password1(class_='form-control', placeholder='Enter password') }}
+    {% for error in form.password1.errors %}
+    <div class="alert alert-danger" role="alert" style="margin-top:10px">
+      [{{ error }}]
+    </div>
+    {% endfor %}
+    <br>
+
+    Confirm Password
+    {{ form.password2(class_='form-control', placeholder='Confirm password') }}
+    {% for error in form.password2.errors %}
+    <div class="alert alert-danger" role="alert" style="margin-top:10px">
+      [{{ error }}]
+    </div>
+    {% endfor %}
+    <br>
+    <p><input style="margin-top: 10px" class="btn btn-outline-primary col-12" type="submit" value="Create"></p>
+</form>
+</div>
+{% endblock %}

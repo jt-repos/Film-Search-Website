@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid col-6">
+<center><h1>Add Screening</h1></center>
+<!--A form to input each of the values into the database with an accept button to confirm-->
+    <form action="" method="post" name="Add Screening">
+        {{ form.hidden_tag() }}
+        Film ID
+        {{ form.filmId(class_='form-control', placeholder='Enter film ID') }}
+        {% for error in form.filmId.errors %}
+         <div class="alert alert-danger" role="alert">
+            [{{ error }}]
+         </div>
+        {% endfor %}
+        <br>
+
+        Cinema ID
+        {{ form.cinemaId(class_='form-control', placeholder='Enter cinema ID') }}
+        {% for error in form.cinemaId.errors %}
+        <div class="alert alert-danger" role="alert">
+          [{{ error }}]
+        </div>
+        {% endfor %}
+        <br>
+
+        <p><input style="margin-top: 10px" class="btn btn-outline-primary col-12" type="submit" value="Add Screening"></p>
+    </form>
+</div>
+{% endblock %}

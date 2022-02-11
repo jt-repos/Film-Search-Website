@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="interactive.js"></script>
+<script>
+$(document).ready(function()
+{
+    $('.panel').hide();
+    $('.panel.active').show();
+});
+
+$(document).on("click", "a", function(){
+    $('a.active').removeClass('active').prop('disabled', false);
+    $(this).addClass('active').prop('disabled', true);
+    var panelToShow = $(this).attr('rel');
+
+    $('.panel.active').hide().removeClass('active');
+    $('#'+panelToShow).show().addClass('active');
+});
+</script>
+
+<center><h1>Browse Films</h1></center>
+
+<div class="container-fluid col-10 shadow p-3 mb-5 bg-white rounded">
+    <nav class="navbar navbar-expand-sm navbar-light bg-white" style="font-size: 20px">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mr-auto">
+            <li class="nav-item"><a class="nav-link active" href="#" rel="a">Films</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" rel="b">Cinemas</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" rel="c">Screenings</a></li>
+
+          </ul>
+        </div>
+      </nav>
+      <div class = "panel active" id = "a">
+          {% for film in films %}
+          <div>
+              <th scope="row"><h3>{{ film.filmName }}</h3></th>
+
+              <table class="table">
+                  <tr>
+                  </tr>
+                  <tbody>
+                  <tr>
+                    <th scope="row">Length:</th>
+                    <td style="word-wrap: break-word; min-width: 700px; max-width: 700px;">{{ film.length }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Release Date:</th>
+                    <td style="word-wrap: break-word; min-width: 700px; max-width: 700px;">{{ film.releaseDate }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Studio Name:</th>
+                    <td style="word-wrap: break-word; min-width: 700px; max-width: 700px;">{{ film.studioName }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p><a href="/markAsFavourite/{{ film.filmId }}"><input style="margin-top: 10px" class="btn btn-outline-primary col-12"  value="Add to favourite"></a></p>
+          </div>
+          {% endfor %}
+      </div>
+
+      <div class = "panel" id = "b">
+          {% for cinema in cinemas %}
+          <div>
+              <th scope="row"><h3>{{ cinema.cinemaName }}</h3></th>
+
+              <table class="table">
+                  <tr>
+                      <th scope="row">Address:</th>
+                      <td style="word-wrap: break-word; min-width: 700px; max-width: 700px;">{{ cinema.address }}</td>
+                  </tr>
+                  <tr>
+                      <th scope="row">Capacity:</th>
+                      <td style="word-wrap: break-word; min-width: 700px; max-width: 700px;">{{ cinema.capacity }}</td>
+                  </tr>
+                  <tbody>
+                  <tr>
+                    <th scope="row">Open Time:</th>
+                    <td style="word-wrap: break-word; min-width: 700px; max-width: 700px;">{{ cinema.openTime }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Close Time:</th>
+                    <td style="word-wrap: break-word; min-width: 700px; max-width: 700px;">{{ cinema.closeTime }}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+          </div>
+          {% endfor %}
+      </div>
+
+      <div class = "panel" id = "c">
+          {% for cinema in cinemas %}
+          {% if cinema.screening %}
+          <div>
+              <th scope="row"><h3>{{ cinema.cinemaName }}, {{ cinema.address }}</h3></th>
+              <table class="table">
+                  {% for screening in cinema.screening %}
+                  <tr>
+                      <th scope="row">Screening:</th>
+                      <td style="word-wrap: break-word; min-width: 700px; max-width: 700px;">{{ screening.filmName }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+          </div>
+          {% endif %}
+          {% endfor %}
+      </div>
+</div>
+{% endblock %}
